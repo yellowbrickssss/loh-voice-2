@@ -112,16 +112,38 @@ const HERO_DATA = [
             },
                         {
                 id: "v_auto_1771076039",
-                label: "영웅 각성 1",
+                label: "영웅 각성 2",
                 transcript: "하, 어디까지 바라는 겐가?",
                 audio: "ondal/dark_ondal (7).mp3"
             },
                         {
                 id: "v_auto_1771076086",
-                label: "영웅 각성 1",
+                label: "영웅 각성 3",
                 transcript: "하, 욕심도 많군. 그래 보이긴 해.",
                 audio: "ondal/dark_ondal (8).mp3"
             }
+        ]
+    },
+    {
+        id: "syphfride",
+        name: "시프리에드",
+        element: "light",
+        title: "여명을 부르는 별",
+        image: "syphfride/light_syphfride.png",
+        voices: [
+                        {
+                id: "v_auto_1771078613",
+                label: "자기소개",
+                transcript: "고룡족의 후예, 시프리에드예요.",
+                audio: "syphfride/light_syphfride.mp3"
+            },
+                        {
+                id: "v_auto_1771078672",
+                label: "영웅 영입",
+                transcript: "적당히 쉬려고 했는데, 그러지도 못하게 하시네요.",
+                audio: "syphfride/light_syphfride (1).mp3"
+            }
+
         ]
     },
        {
