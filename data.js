@@ -58,6 +58,114 @@ const HERO_DATA = [
                 label: "영웅 각성 2",
                 transcript: "네가…. 이렇게까지 하는 이유가 있겠지? 하하하하!",
                 audio: "ondal/ondal (7).mp3"
+            },
+                    {
+                id: "v_auto_1771081405",
+                label: "영웅 각성 3",
+                transcript: "알았다, 알았어. 너와의 신의는 지킬 테니, 걱정하지 말아라.",
+                audio: "ondal/ondal (11).mp3"
+            },
+                        {
+                id: "v_auto_1771081477",
+                label: "타이틀 콜",
+                transcript: "Lord Of Heroes.",
+                audio: "ondal/ondal (12).mp3"
+            },
+                        {
+                id: "v_auto_1771081757",
+                label: "영웅 화면 1",
+                transcript: "글쎄, 어떻게 여기로 왔는지는 나도 모르겠군. 그냥 눈 떠 보니 이 곳이었지. 어처구니 없는 일이다.",
+                audio: "ondal/ondal (14).mp3"
+            },
+                        {
+                id: "v_auto_1771081983",
+                label: "영웅 화면 2",
+                transcript: "여기가 싫다고 말한 적은 없는데. 그래도, 네가 나라면 돌아가고 싶지 않겠나. 하!",
+                audio: "ondal/ondal (13).mp3"
+            },
+                        {
+                id: "v_auto_1771082482",
+                label: "영웅 화면 3",
+                transcript: "글은 못 읽는다, 까막눈이지. 대신 들을 수 있는 귀, 말할 수 있는 혀, 생각할 수 있는 머리가 있고…. 이 정도면 충분하지 않나?",
+                audio: "ondal/ondal_2.mp3"
+            },
+                        {
+                id: "v_auto_1771082791",
+                label: "영웅 화면 4",
+                transcript: "가우리에 대한 이야기가 궁금한가…. 그렇군. …음? 말해주겠다고 한 적은 없는데? 하하하, 농담이다. 너에게는 충분히 알려줄 수 있지.",
+                audio: "ondal/ondal_2 (1).mp3"
+            },
+                        {
+                id: "v_auto_1771082973",
+                label: "영웅 화면 5",
+                transcript: "글쎄…. 글을 배워 보려고 한 적은 있지만, 잘 읽히지가 않더군. 그냥 그렇게 타고난 모양이지. 하지만, 그게 큰 문제라고 생각해 본 적은 없다. 읽어 줄 사람이, 항상 옆에 있었거든.",
+                audio: "ondal/ondal_2 (2).mp3"
+            },
+                        {
+                id: "v_auto_1771083675",
+                label: "영웅 화면 6",
+                transcript: "상대가 원하는 걸 먼저 알아챌 수 있으면, 꽤 살기 편해지지. 나는 항상 그래왔다.",
+                audio: "ondal/ondal_2 (3).mp3"
+            },
+                        {
+                id: "v_auto_1771083730",
+                label: "영웅 화면 7",
+                transcript: "어린 시절이 썩 유복하진 않았지. 집이 가난하니, 살아남기 위해 뭐든 했었고. 덕분에, 비위는 아주 좋은 편이고.",
+                audio: "ondal/ondal_2 (4).mp3"
+            },
+                        {
+                id: "v_auto_1771085435",
+                label: "영웅 화면 8",
+                transcript: "가우리에서의 마지막 전장이, 아직도 생생하다. 워낙 불리한 상황에서 나까지 사라졌으니. …전부 죽었겠지. …나를 기억해 줄 사람도, 내가 의리를 지켜야 할 사람도.",
+                audio: "ondal/ondal_2 (5).mp3"
+            },
+                        {
+                id: "v_auto_1771085534",
+                label: "영웅 화면 9",
+                transcript: "굳이 뭔가를 다시 찾아보기 위해 지난 기록을 뒤져야 할 필요가 있나? 다 기억하면 되는데.",
+                audio: "ondal/ondal_2 (8).mp3"
+            },
+                        {
+                id: "v_auto_1771085660",
+                label: "영웅 화면 10",
+                transcript: "온갖 비열한 짓은 다 해 봤지. 적들이 그만큼 강했으니까. …음? 하하! 그럼 가난한 평민이, 어떻게 장군의 자리까지 올라갔을까. 나는 고결함이나 선인과는 거리가 먼 사람이야.",
+                audio: "ondal/ondal_2 (6).mp3"
+            },
+                        {
+                id: "v_auto_1771086277",
+                label: "영웅 화면 11",
+                transcript: "정치라 하면 민생을 돌보는 일이라 알고 있지. 나는 무인이니, 그쪽은 잘 모르지만. 결정을 내리는 자들이 헛짓거리만 안 하면 된다고 생각한다. 그렇지 않나? '결정권자'. 하하!",
+                audio: "ondal/ondal_2 (9).mp3"
+            },
+                        {
+                id: "v_auto_1771086403",
+                label: "영웅 화면 12",
+                transcript: "누군가를 도왔기 때문에 피해를 본다면, 감내해야지. 뭐…. 웬만해서는 이득을 보는 쪽을 택하지만. 가끔은 이익이니 손해니 하는 것들이, 중요하지 않은 때도 있지 않나.",
+                audio: "ondal/ondal_2 (10).mp3"
+            },
+                        {
+                id: "v_auto_1771086511",
+                label: "영웅 화면 13",
+                transcript: "사신수의 전승자는, 굉장히 비밀스러운 존재들이었지. 우리 대에는, 역사의 전면에 나선 적도 없었으니.",
+                audio: "ondal/ondal_2 (11).mp3"
+            },
+                        {
+                id: "v_auto_1771087114",
+                label: "영웅 화면 14",
+                transcript: "글쎄, 내가 이뤄냈던 것들이 아쉽다기보다는, 남겨진 자들에 대한 미안함이 더 크지.나는 시간을 거슬러, 지금 이렇게 살아 있는데. 왜 그들은 사라져야만 했을까.",
+                audio: "ondal/ondal_2 (12).mp3"
+            },
+                        {
+                id: "v_auto_1771087236",
+                label: "영웅 화면 15",
+                transcript: "마법사라…. 너희가 동방이라 부르는 내 고향에도, 비슷한 존재들이 있지. 도술사라고 하는데, 벼락을 부르고, 비를 내리고, 몸을 여러 개로 만들기도 하고, 하루에 천 리를 달리기도 해.",
+                audio: "ondal/ondal_2 (13).mp3"
+            },
+                        {
+                id: "v_auto_1771087285",
+                label: "영웅 화면 16",
+                transcript: "그러니까 나는, 시간의 미아인 셈이지. 돌아갈 곳이 없지 않나.",
+                audio: "ondal/ondal_2 (14).mp3"
             }
         ]
     },
@@ -144,6 +252,33 @@ const HERO_DATA = [
                 audio: "syphfride/light_syphfride (1).mp3"
             }
 
+        ]
+    },
+        {
+        id: "earth_raligon",
+        name: "라르곤",
+        element: "earth",
+        title: "어둠을 비추는 서광",
+        image: "raligon/earth_raligon.png",
+        voices: [
+        ]
+    },
+        {
+        id: "dark_brandon",
+        name: "브랜든",
+        element: "dark",
+        title: "무저갱을 비추는 광명",
+        image: "brandon/dark_brandon.png",
+        voices: [
+        ]
+    },
+        {
+        id: "water_rosanna",
+        name: "로잔나",
+        element: "water",
+        title: "바다와 섬의 수호자",
+        image: "rosanna/water_rosanna.png",
+        voices: [
         ]
     },
        {

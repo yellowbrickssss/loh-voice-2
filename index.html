@@ -327,6 +327,8 @@
             position: relative;
             padding-left: 20px;
             border-left: 1px solid var(--accent-line);
+            word-break: keep-all;
+            overflow-wrap: break-word;
         }
 
         .quote-meta {
@@ -489,6 +491,7 @@
             body {
                 height: auto;
                 overflow: auto;
+                font-size: 14px;
             }
             .app-container {
                 padding: 20px;
@@ -500,6 +503,7 @@
                 align-items: center;
                 gap: 12px;
                 padding-right: 0;
+                padding-left: 0;
                 padding-bottom: 12px;
                 border-right: none;
                 border-bottom: 1px solid rgba(255,255,255,0.06);
@@ -510,10 +514,12 @@
                 margin-top: 12px;
             }
             .hero-list::-webkit-scrollbar { display: none; }
-            .hero-arrow { display: inline-flex; }
+            .hero-arrow { display: inline-flex; position: fixed; top: auto; bottom: 20px; }
             .hex-container {
                 width: 72px;
                 height: calc(72px * 0.866);
+                flex: 0 0 72px;
+                flex-shrink: 0;
             }
             .voice-list-section {
                 margin-left: 0;
@@ -523,6 +529,12 @@
                 overflow: visible;
                 margin-bottom: 12px;
                 -webkit-overflow-scrolling: touch;
+            }
+            .voice-item {
+                padding: 19px 24px;
+            }
+            .voice-scroll {
+                min-height: 40vh;
             }
             .voice-scroll {
                 max-height: 45vh;
