@@ -430,6 +430,33 @@ const HERO_DATA = [
         ]
     },
         {
+        id: "water_miriande",
+        name: "미리안드",
+        element: "water",
+        title: "근원에 닿은 이치",
+        image: "miriande/water_miriande.png",
+        voices: [
+        ]
+    },
+        {
+        id: "earth_miriande",
+        name: "미리안드",
+        element: "earth",
+        title: "백록의 마법사",
+        image: "miriande/earth_miriande.png",
+        voices: [
+        ]
+    },
+        {
+        id: "fire_miriande",
+        name: "미리안드",
+        element: "fire",
+        title: "순리의 역행자",
+        image: "miriande/fire_miriande.png",
+        voices: [
+        ]
+    },
+        {
         id: "earth_raligon",
         name: "라르곤",
         element: "earth",
