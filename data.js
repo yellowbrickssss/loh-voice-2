@@ -570,6 +570,66 @@ const HERO_DATA = [
                 label: "영웅 화면 5",
                 transcript: "종족주의, 민족주의, 요즘 같은 시대엔 어울리지 않죠. 그대처럼 그릇이 큰 사람이 많으면 좋을 텐데.",
                 audio: "lucilica/lucil (12).mp3"
+            },
+                        {
+                id: "v_auto_1771206577",
+                label: "영웅 화면 6",
+                transcript: "네? 사람이 바뀐다고요? 당연하죠! 사람이 항상 한결 같을 수 있나요? 저도, 편하게 말할 상대 쯤은 있어야죠. 네? 아니 제가…. 그대를 편하게 생각하는 게, 잘못된 건가요?",
+                audio: "lucilica/lucil (13).mp3"
+            },
+            {
+                id: "v_auto_1771206676",
+                label: "영웅 화면 7",
+                transcript: "포기하는 건, 제 성격에 안 맞아요. 어떤 고난이 있을지라도 힘껏 발버둥 치다 보면, 조금씩은 더 나아지기 마련이더군요.",
+                audio: "lucilica/lucil (14).mp3"
+            },
+                        {
+                id: "v_auto_1771207629",
+                label: "영웅 화면 8",
+                transcript: "귀가 짧은 쪽은 편할지도 모르겠네요. 침대 위에서 돌아 누우면 좀 걸리적거리거든요. 아이, 엘펜하임에서 베개를 공수해 오든 해야지. 음!",
+                audio: "lucilica/lucil (15).mp3"
+            },
+            {
+                id: "v_auto_1771207690",
+                label: "영웅 화면 9",
+                transcript: "다녀오셨나요?",
+                audio: "lucilica/lucil (16).mp3"
+            },
+            {
+                id: "v_auto_1771207735",
+                label: "영웅 화면 10",
+                transcript: "오랜만이네요? 너무 바깥 일에만 신경 쓰시는 거 아니에요?",
+                audio: "lucilica/lucil (17).mp3"
+            },
+            {
+                id: "v_auto_1771207799",
+                label: "영웅 화면 11",
+                transcript: "선물이라, 받는 것도 좋지만 사실 주는 기쁨이 더 큰 것 같기도 해요.",
+                audio: "lucilica/lucil (18).mp3"
+            },
+            {
+                id: "v_auto_1771207846",
+                label: "영웅 화면 12",
+                transcript: "정말, 애도 아니고! 으음! 뭐! 가끔 기분 전환도 해야죠!",
+                audio: "lucilica/lucil (19).mp3"
+            },
+            {
+                id: "v_auto_1771207884",
+                label: "영웅 화면 13",
+                transcript: "가끔은, 이런 것도 나쁘지 않군요.",
+                audio: "lucilica/lucil (20).mp3"
+            },
+            {
+                id: "v_auto_1771207963",
+                label: "영웅 화면 14",
+                transcript: "수면은 단순한 휴식 문제가 아니라는 말, 그대에게 해 주지 않았던가요? 왜 여기 사람들은 하나같이 잠을 줄여서 일하려고 드는지 몰라.",
+                audio: "lucilica/lucil (21).mp3"
+            },
+            {
+                id: "v_auto_1771208037",
+                label: "영웅 화면 15",
+                transcript: "그대는 말하는 법을 좀 교정할 필요가 있어요. 나, 원 참. 매일같이, '내가 바라는 것은 그대다', 같은 말이나 해 대니 오해하는 사람이 생기죠.",
+                audio: "lucilica/lucil (22).mp3"
             }
             
         ]    

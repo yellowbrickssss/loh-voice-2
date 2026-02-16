@@ -89,7 +89,7 @@
             1. Left: Hero Selection (Regular Hexagons)
         */
         .hero-list {
-            flex: 0 0 140px;
+            flex: 0 0 170px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -100,6 +100,85 @@
             scrollbar-width: none;
         }
         .hero-list::-webkit-scrollbar { display: none; }
+        .hero-search {
+            width: 100%;
+            padding-top: 4px;
+            padding-bottom: 8px;
+            display: flex;
+            justify-content: center;
+        }
+        .hero-search-inner {
+            position: relative;
+            width: 100%;
+            max-width: 170px;
+        }
+        .hero-search-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
+            fill: var(--text-muted);
+            pointer-events: none;
+        }
+        .hero-search-input {
+            width: 100%;
+            padding: 6px 10px 6px 30px;
+            border-radius: 999px;
+            border: 1px solid rgba(137,196,244,0.35);
+            background: rgba(8,11,18,0.85);
+            color: var(--text-main);
+            font-size: 12px;
+        }
+        .hero-search-input::placeholder {
+            color: var(--text-muted);
+            font-size: 11px;
+        }
+        .hero-search-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 1px rgba(137,196,244,0.4);
+        }
+        .mobile-hero-search-btn {
+            position: fixed;
+            top: 64px;
+            left: 16px;
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            border: 1px solid rgba(137,196,244,0.4);
+            background: rgba(8,11,18,0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9;
+        }
+        .mobile-hero-search-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--text-main);
+        }
+        .mobile-hero-search-bar {
+            position: fixed;
+            top: 64px;
+            left: 64px;
+            right: 16px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(137,196,244,0.35);
+            background: rgba(8,11,18,0.96);
+            display: none;
+            opacity: 0;
+            transform: translateY(-6px);
+            transition: opacity 0.18s ease, transform 0.18s ease;
+            z-index: 8;
+        }
+        .mobile-hero-search-bar.open {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
         
         .hero-arrow {
             position: absolute;
@@ -196,6 +275,7 @@
             flex-direction: column;
             overflow-y: auto;
             padding-right: 10px;
+            max-height: calc(100% - 96px);
         }
         .voice-list-section::-webkit-scrollbar {
             width: 4px;
@@ -209,6 +289,7 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
+            padding-bottom: 80px;
         }
 
         .section-title {
@@ -332,16 +413,21 @@
             box-shadow: 0 0 10px var(--accent-glow);
             transition: width 0.2s ease;
         }
-        .bottom-footer {
+        .footer-spacer {
             position: absolute;
             left: 0;
             right: 0;
-            bottom: 16px;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            pointer-events: none;
+        }
+        .bottom-footer {
             display: flex;
             flex-direction: column;
             align-items: center;
             pointer-events: auto;
-            padding: 20px 0;
+            padding: 20px 0 24px;
         }
         .bottom-twitter {
             display: flex;
@@ -359,6 +445,7 @@
         }
         .bottom-credit {
             margin-top: 8px;
+            margin-bottom: 24px;
             font-size: 12px;
             color: var(--text-muted);
             opacity: 0.9;
@@ -715,12 +802,19 @@
                 scrollbar-width: none;
             }
             .hero-list::-webkit-scrollbar { display: none; }
+            .hero-search { display: none; }
             .hero-arrow { display: none; }
+            .mobile-hero-search-btn { display: flex; }
+            .mobile-hero-search-bar { display: block; }
             .hex-container {
                 width: 72px;
                 height: calc(72px * 0.866);
                 flex: 0 0 72px;
                 flex-shrink: 0;
+            }
+            .footer-spacer {
+                position: static;
+                order: 3;
             }
             .bottom-footer {
                 position: static;
@@ -729,7 +823,6 @@
                 bottom: auto;
                 margin-top: 24px;
                 padding-bottom: 40px;
-                order: 3;
             }
             .bottom-footer .upload-progress { display: flex; }
             .transcript-section .upload-progress { display: none; }
@@ -741,6 +834,7 @@
                 overflow: visible;
                 margin-bottom: 12px;
                 -webkit-overflow-scrolling: touch;
+                max-height: none;
             }
             .voice-item {
                 padding: 19px 24px;
@@ -842,6 +936,20 @@
             </button>
         </div>
     </div>
+    <button class="mobile-hero-search-btn" id="mbHeroSearch" aria-label="영웅 검색">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M15.5 14h-.79l-.28-.28A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.22-1.57l.28.28v.79L19 20.5 20.5 19 15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+        </svg>
+    </button>
+    <div class="mobile-hero-search-bar" id="mbHeroSearchBar">
+        <input
+            type="text"
+            id="heroSearchInputMobile"
+            class="hero-search-input"
+            placeholder="영웅 이름 검색"
+            autocomplete="off"
+        >
+    </div>
     <div class="music-accordion" id="mbAccordion">
         <div class="music-list" id="mbListBody"></div>
     </div>
@@ -857,7 +965,20 @@
             <button class="hero-arrow hero-arrow-right" aria-label="오른쪽으로 이동">
                 <svg viewBox="0 0 24 24"><path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
             </button>
-            
+            <div class="hero-search">
+                <div class="hero-search-inner">
+                    <svg class="hero-search-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M15.5 14h-.79l-.28-.28A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.22-1.57l.28.28v.79L19 20.5 20.5 19 15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                    </svg>
+                    <input
+                        type="text"
+                        id="heroSearchInput"
+                        class="hero-search-input"
+                        placeholder="영웅 이름 검색"
+                        autocomplete="off"
+                    >
+                </div>
+            </div>
         </aside>
 
         <!-- Middle: Voice List -->
@@ -871,21 +992,23 @@
         <section class="transcript-section">
              <!-- Dynamic Content will be loaded here via app.js -->
         </section>
-        <div class="bottom-footer">
-            <div id="mobileProgress" class="upload-progress">
-                <div class="upload-progress-text"></div>
-                <div class="upload-progress-bar">
-                    <div class="upload-progress-bar-fill"></div>
+        <div class="footer-spacer">
+            <div class="bottom-footer">
+                <div id="mobileProgress" class="upload-progress">
+                    <div class="upload-progress-text"></div>
+                    <div class="upload-progress-bar">
+                        <div class="upload-progress-bar-fill"></div>
+                    </div>
                 </div>
+                <div class="bottom-twitter">
+                    <a href="https://x.com/lohvoice" target="_blank" rel="noopener noreferrer" aria-label="Twitter 바로가기">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M23.643 4.937c-.835.37-1.732.62-2.675.733a4.657 4.657 0 0 0 2.048-2.57 9.294 9.294 0 0 1-2.946 1.133 4.64 4.64 0 0 0-7.9 4.235 13.162 13.162 0 0 1-9.563-4.848 4.637 4.637 0 0 0 1.435 6.187 4.623 4.623 0 0 1-2.1-.58v.06a4.642 4.642 0 0 0 3.72 4.55 4.676 4.676 0 0 1-2.094.08 4.645 4.645 0 0 0 4.333 3.22A9.304 9.304 0 0 1 1.11 19.29a13.128 13.128 0 0 0 7.115 2.086c8.543 0 13.213-7.077 13.213-13.213 0-.2-.005-.402-.014-.602a9.34 9.34 0 0 0 2.319-2.384z"></path>
+                        </svg>
+                    </a>
+                </div>
+                <div class="bottom-credit">made by. @lohvoice (@gaesaryeo)</div>
             </div>
-            <div class="bottom-twitter">
-                <a href="https://x.com/lohvoice" target="_blank" rel="noopener noreferrer" aria-label="Twitter 바로가기">
-                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M23.643 4.937c-.835.37-1.732.62-2.675.733a4.657 4.657 0 0 0 2.048-2.57 9.294 9.294 0 0 1-2.946 1.133 4.64 4.64 0 0 0-7.9 4.235 13.162 13.162 0 0 1-9.563-4.848 4.637 4.637 0 0 0 1.435 6.187 4.623 4.623 0 0 1-2.1-.58v.06a4.642 4.642 0 0 0 3.72 4.55 4.676 4.676 0 0 1-2.094.08 4.645 4.645 0 0 0 4.333 3.22A9.304 9.304 0 0 1 1.11 19.29a13.128 13.128 0 0 0 7.115 2.086c8.543 0 13.213-7.077 13.213-13.213 0-.2-.005-.402-.014-.602a9.34 9.34 0 0 0 2.319-2.384z"></path>
-                    </svg>
-                </a>
-            </div>
-            <div class="bottom-credit">made by. @gaesaryeo</div>
         </div>
 
     </div>

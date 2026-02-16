@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let musicIndex = 0;
     let shuffleOn = false;
     let uploadProgress = { total: 0 };
+    let heroSearchTerm = '';
     const ARCHIVE_TARGET_HEROES = 187;
     const ARCHIVE_TARGET_VOICES_PER_HERO = 35;
     const MUSIC_PLAYLIST = (window.MUSIC_PLAYLIST && window.MUSIC_PLAYLIST.length)
@@ -113,8 +114,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function init() {
         renderHeroList();
+        initHeroSearch();
+        initMobileHeroSearchToggle();
         initHeroArrows();
-        // Select first hero by default if available
         if (HERO_DATA.length > 0) {
             selectHero(HERO_DATA[0].id);
         }
@@ -126,9 +128,64 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 1. Render Hero List (Left Column)
+    function normalizeText(text){
+        return String(text||'').toLowerCase();
+    }
+    function getFilteredHeroes(){
+        const keyword = normalizeText(heroSearchTerm.trim());
+        if (!keyword) return HERO_DATA.slice();
+        return HERO_DATA.filter(hero=>normalizeText(hero.name).includes(keyword));
+    }
+    function applyHeroFilter(){
+        const keyword = normalizeText(heroSearchTerm.trim());
+        const hexes = heroListEl.querySelectorAll('.hex-container');
+        hexes.forEach(el=>{
+            const heroId = el.dataset.id;
+            const hero = HERO_DATA.find(h=>h.id === heroId);
+            const match = !keyword || (hero && normalizeText(hero.name).includes(keyword));
+            el.style.display = match ? '' : 'none';
+        });
+    }
+    function initHeroSearch(){
+        const inputs = [
+            document.getElementById('heroSearchInput'),
+            document.getElementById('heroSearchInputMobile')
+        ].filter(Boolean);
+        if (!inputs.length) return;
+        function syncAndFilter(active){
+            heroSearchTerm = active.value;
+            inputs.forEach(el=>{
+                if (el!==active && el.value!==heroSearchTerm) el.value = heroSearchTerm;
+            });
+            applyHeroFilter();
+        }
+        inputs.forEach(input=>{
+            input.addEventListener('input', ()=>{
+                syncAndFilter(input);
+            });
+        });
+    }
+    function initMobileHeroSearchToggle(){
+        const btn = document.getElementById('mbHeroSearch');
+        const bar = document.getElementById('mbHeroSearchBar');
+        const input = document.getElementById('heroSearchInputMobile');
+        if (!btn || !bar || !input) return;
+        function open(){
+            bar.classList.add('open');
+            setTimeout(()=>{
+                input.focus();
+            },10);
+        }
+        function close(){
+            bar.classList.remove('open');
+        }
+        btn.addEventListener('click', ()=>{
+            const isOpen = bar.classList.contains('open');
+            if (isOpen) close(); else open();
+        });
+    }
     function renderHeroList() {
         heroListEl.querySelectorAll('.hex-container').forEach(el=>el.remove());
-
         HERO_DATA.forEach(hero => {
             const hexContainer = document.createElement('div');
             hexContainer.className = 'hex-container';
@@ -153,6 +210,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     fallback.style.background = glowColor;
                     imgEl.replaceWith(fallback);
                 });
+            }
+
+            if (currentHero && currentHero.id === hero.id) {
+                hexContainer.classList.add('active');
             }
 
             hexContainer.addEventListener('click', () => {
