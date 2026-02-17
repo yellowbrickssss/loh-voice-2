@@ -1,128 +1,128 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // DOM Elements
-    const heroListEl = document.querySelector('.hero-list');
-    const voiceListEl = document.querySelector('.voice-list-section');
-    const transcriptEl = document.querySelector('.transcript-section');
-    
-    // State
-    let currentHero = null;
-    let currentVoice = null;
-    let playingId = null;
-    const audio = new Audio();
-    const bgAudio = new Audio();
-    const visualizer = new VisualizerController();
-    let musicIndex = 0;
-    let shuffleOn = false;
-    let uploadProgress = { total: 0 };
-    let heroSearchTerm = '';
-    const ARCHIVE_TARGET_TOTAL_VOICES = 10080;
-    const MUSIC_PLAYLIST = (window.MUSIC_PLAYLIST && window.MUSIC_PLAYLIST.length)
-        ? window.MUSIC_PLAYLIST
-        : [
-            { src: "music/Janet Suhh (자넷서)-01-Us, in Memories.mp3", title: "Us, in Memories" },
-            { src: "music/LUCY-01-Light UP.mp3", title: "Light UP" },
-            { src: "music/엔플라잉 (N.Flying)-01-Chance.mp3", title: "Chance" },
-            { src: "music/용훈 (ONEWE)-01-이음선(TIMELORD) (Narr. 온달).mp3", title: "이음선(TIMELORD)" },
-            { src: "music/하람-01-Remember the days.mp3", title: "Remember the days" },
-            { title: "빛의 시작(My First Light)", artist: "수안 (퍼플키스)", src: "music/수안 (퍼플키스)-01-빛의 시작(My First Light).mp3"},
-            { title: "Chance (Inst.)", artist: "엔플라잉 (N.Flying)", src: "music/엔플라잉 (N.Flying)-03-Chance (Inst.).mp3"},
-            { title: "Eternal Bloom (Korean Version)", artist: "윤마치 (MRCH)", src: "music/윤마치 (MRCH)-01-Eternal Bloom (Korean Version).mp3"},
-        ];
-    const PATCH_NOTES = (window.PATCH_NOTES && window.PATCH_NOTES.length)
-        ? window.PATCH_NOTES
-        : [
-            {
-                id: "2026-02-15",
-                title: "미보유 영웅 목록: 도움 요청",
-                date: "2026-02-15",
-                body: [
-                    "대지 즈라한",
-                    "빛 즈라한",
-                    "불 즈라한",
-                    "물 즈라한",
-                    "대지 자이라",
-                    "빛 슈나이더",
-                    "어둠 슈나이더",
-                    "불 시프리에드",
-                    "어둠 스칼렌",
-                    "물 라우젤릭",
-                    "어둠 루인",
-                    "빛 로잔나",
-                    "대지 린",
-                    "빛 라샤드",
-                    "물 라샤드",
-                    "불 리카르도",
-                    "물 리카르도",
-                    "대지 오스왈드",
-                    "어둠 올가",
-                    "물 나탈리",
-                    "빛 라플라스",
-                    "물 라플라스",
-                    "대지 조슈아",
-                    "어둠 이카테스톨",
-                    "불 이안",
-                    "불 헬가",
-                    "어둠 프람",
-                    "어둠 크롬",
-                    "어둠 샬롯",
-                    "대지 카를 3세",
-                    "물 비앙카",
-                    "불 비앙카",
-                    "대지 비류",
-                    "불 바레타",
-                    "대지 아슬란",
-                    "대지 아란",
-                    "물 아란",
-                    "물 아힐람",
-                    "",
-                    "위 영웅들 중 최애가 있다면 꼭 hyeya4847@gmail.com 으로 보내 주세요!",
-                    "확보 완료된 영웅은 혼동을 방지하기 위해 삭제합니다."
-                ].join("\n")
-            },
-            {
-                id: "2026-02-15",
-                title: "02.15 개발자 노트",
-                date: "2026-02-15",
-                body: [
-                    "- 상단바 우측에 개발자 노트 추가",
-                    "- 오디오 비주얼라이저 추가: 인게임보다 더 있어 보이고 싶었습니다.",
-                    "- 일부 대사 부분 추가, 영웅 리스트업. 대사도 추가 예정.",
-                    "\n- [대지] 온달, [어둠] 온달 '영웅 화면' 대사 업데이트\n온달들에게 일단 너희라도 열심히 떠들어 두라고 말해 두었습니다. \n한 명은 조금 토라진 것 같기는 하지만 크게 신경 쓰일 정도는 아닙니다."
-                ].join("\n")
-            },
-            {
-                id: "2026-02-14",
-                title: "02.14 개선사항",
-                date: "2026-02-14",
-                body: [
-                    "- 음악 재생바 안정성 개선",
-                    "- 모바일에서 진행바 숨김 처리"
-                ].join("\n")
-            }
-        ];
-    function isMobile(){
-        return window.matchMedia('(max-width: 900px)').matches;
-    }
+// DOM Elements
+const heroListEl = document.querySelector('.hero-list');
+const voiceListEl = document.querySelector('.voice-list-section');
+const transcriptEl = document.querySelector('.transcript-section');
 
-    // Initialize
-    init();
-
-    function init() {
-        renderHeroList();
-        initHeroSearch();
-        initMobileHeroSearchToggle();
-        initHeroArrows();
-        if (HERO_DATA.length > 0) {
-            selectHero(HERO_DATA[0].id);
+// State
+let currentHero = null;
+let currentVoice = null;
+let playingId = null;
+const audio = new Audio();
+const bgAudio = new Audio();
+const visualizer = new VisualizerController();
+let musicIndex = 0;
+let shuffleOn = false;
+let uploadProgress = { total: 0 };
+let heroSearchTerm = '';
+const ARCHIVE_TARGET_TOTAL_VOICES = 10080;
+const MUSIC_PLAYLIST = (window.MUSIC_PLAYLIST && window.MUSIC_PLAYLIST.length)
+    ? window.MUSIC_PLAYLIST
+    : [
+        { src: "music/Janet Suhh (자넷서)-01-Us, in Memories.mp3", title: "Us, in Memories" },
+        { src: "music/LUCY-01-Light UP.mp3", title: "Light UP" },
+        { src: "music/엔플라잉 (N.Flying)-01-Chance.mp3", title: "Chance" },
+        { src: "music/용훈 (ONEWE)-01-이음선(TIMELORD) (Narr. 온달).mp3", title: "이음선(TIMELORD)" },
+        { src: "music/하람-01-Remember the days.mp3", title: "Remember the days" },
+        { title: "빛의 시작(My First Light)", artist: "수안 (퍼플키스)", src: "music/수안 (퍼플키스)-01-빛의 시작(My First Light).mp3"},
+        { title: "Chance (Inst.)", artist: "엔플라잉 (N.Flying)", src: "music/엔플라잉 (N.Flying)-03-Chance (Inst.).mp3"},
+        { title: "Eternal Bloom (Korean Version)", artist: "윤마치 (MRCH)", src: "music/윤마치 (MRCH)-01-Eternal Bloom (Korean Version).mp3"},
+    ];
+const PATCH_NOTES = (window.PATCH_NOTES && window.PATCH_NOTES.length)
+    ? window.PATCH_NOTES
+    : [
+        {
+            id: "2026-02-15",
+            title: "미보유 영웅 목록: 도움 요청",
+            date: "2026-02-15",
+            body: [
+                "대지 즈라한",
+                "빛 즈라한",
+                "불 즈라한",
+                "물 즈라한",
+                "대지 자이라",
+                "빛 슈나이더",
+                "어둠 슈나이더",
+                "불 시프리에드",
+                "어둠 스칼렌",
+                "물 라우젤릭",
+                "어둠 루인",
+                "빛 로잔나",
+                "대지 린",
+                "빛 라샤드",
+                "물 라샤드",
+                "불 리카르도",
+                "물 리카르도",
+                "대지 오스왈드",
+                "어둠 올가",
+                "물 나탈리",
+                "빛 라플라스",
+                "물 라플라스",
+                "대지 조슈아",
+                "어둠 이카테스톨",
+                "불 이안",
+                "불 헬가",
+                "어둠 프람",
+                "어둠 크롬",
+                "어둠 샬롯",
+                "대지 카를 3세",
+                "물 비앙카",
+                "불 비앙카",
+                "대지 비류",
+                "불 바레타",
+                "대지 아슬란",
+                "대지 아란",
+                "물 아란",
+                "물 아힐람",
+                "",
+                "위 영웅들 중 최애가 있다면 꼭 hyeya4847@gmail.com 으로 보내 주세요!",
+                "확보 완료된 영웅은 혼동을 방지하기 위해 삭제합니다."
+            ].join("\n")
+        },
+        {
+            id: "2026-02-15",
+            title: "02.15 개발자 노트",
+            date: "2026-02-15",
+            body: [
+                "- 상단바 우측에 개발자 노트 추가",
+                "- 오디오 비주얼라이저 추가: 인게임보다 더 있어 보이고 싶었습니다.",
+                "- 일부 대사 부분 추가, 영웅 리스트업. 대사도 추가 예정.",
+                "\n- [대지] 온달, [어둠] 온달 '영웅 화면' 대사 업데이트\n온달들에게 일단 너희라도 열심히 떠들어 두라고 말해 두었습니다. \n한 명은 조금 토라진 것 같기는 하지만 크게 신경 쓰일 정도는 아닙니다."
+            ].join("\n")
+        },
+        {
+            id: "2026-02-14",
+            title: "02.14 개선사항",
+            date: "2026-02-14",
+            body: [
+                "- 음악 재생바 안정성 개선",
+                "- 모바일에서 진행바 숨김 처리"
+            ].join("\n")
         }
+    ];
+function isMobile(){
+    return window.matchMedia('(max-width: 900px)').matches;
+}
+
+function init() {
+    renderHeroList();
+    initHeroSearch();
+    initMobileHeroSearchToggle();
+    initHeroArrows();
+    if (HERO_DATA.length > 0) {
+        selectHero(HERO_DATA[0].id);
+    }
+    setTimeout(() => {
         initMusicBar();
         initIntro();
         initUploadProgress();
         initContextGuard();
         initPatchNotes();
-    }
+    }, 0);
+}
 
-    // 1. Render Hero List (Left Column)
+init();
+
+// 1. Render Hero List (Left Column)
     function normalizeText(text){
         return String(text||'').toLowerCase();
     }
@@ -623,4 +623,3 @@ document.addEventListener('DOMContentLoaded', () => {
         ensureFooterProgress();
         renderUploadProgress();
     }
-});
