@@ -347,51 +347,51 @@ const HERO_DATA = [
 
         ]
     },
-        {
-        id: "earth_miriande",
-        name: "미리안드",
-        element: "earth",
-        title: "백록의 마법사",
-        image: "miriande/earth_miriande.png",
-        voices: [
-        ]
-    },
-        {
-        id: "fire_miriande",
-        name: "미리안드",
-        element: "fire",
-        title: "순리의 역행자",
-        image: "miriande/fire_miriande.png",
-        voices: [
-        ]
-    },
-        {
-        id: "earth_raligon",
-        name: "라르곤",
-        element: "earth",
-        title: "어둠을 비추는 서광",
-        image: "raligon/earth_raligon.png",
-        voices: [
-        ]
-    },
-        {
-        id: "dark_brandon",
-        name: "브랜든",
-        element: "dark",
-        title: "무저갱을 비추는 광명",
-        image: "brandon/dark_brandon.png",
-        voices: [
-        ]
-    },
-        {
-        id: "earth_brandon",
-        name: "브랜든",
-        element: "earth",
-        title: "불요의 희망",
-        image: "brandon/earth_brandon.png",
-        voices: [
-        ]
-    },
+//        {
+//        id: "earth_miriande",
+//        name: "미리안드",
+//        element: "earth",
+//        title: "백록의 마법사",
+//        image: "miriande/earth_miriande.png",
+//        voices: [
+//        ]
+//    },
+//        {
+//        id: "fire_miriande",
+//        name: "미리안드",
+//        element: "fire",
+//        title: "순리의 역행자",
+//        image: "miriande/fire_miriande.png",
+//        voices: [
+//        ]
+//    },
+//        {
+//        id: "earth_raligon",
+//        name: "라르곤",
+//        element: "earth",
+//        title: "어둠을 비추는 서광",
+//        image: "raligon/earth_raligon.png",
+//        voices: [
+//        ]
+//    },
+//        {
+//        id: "dark_brandon",
+//        name: "브랜든",
+//        element: "dark",
+//        title: "무저갱을 비추는 광명",
+//        image: "brandon/dark_brandon.png",
+//        voices: [
+//        ]
+//    },
+//        {
+//        id: "earth_brandon",
+//        name: "브랜든",
+//        element: "earth",
+//        title: "불요의 희망",
+//        image: "brandon/earth_brandon.png",
+//        voices: [
+//        ]
+//    },
         {
         id: "water_rosanna",
         name: "로잔나",
@@ -399,6 +399,210 @@ const HERO_DATA = [
         title: "바다와 섬의 수호자",
         image: "rosanna/water_rosanna.png",
         voices: [
+                        {
+                id: "v_auto_1771314110",
+                label: "자기소개",
+                transcript: "로잔나 데 메디치. 이 이름의 무게를 알길 바라.",
+                audio: "rosanna/water_rosanna/물-로잔나 자기소개.mp3"
+            },
+              {
+                id: "v_auto_1771314340",
+                label: "영웅 영입 1",
+                transcript: "로잔나 데 메디치. 알지?",
+                audio: "rosanna/water_rosanna/물-로잔나 영입.mp3"
+            },
+                        {
+                id: "v_auto_1771314426",
+                label: "영웅 영입 2",
+                transcript: "이제 만족하냐? 기어이 나를 이렇게 만들었구나.",
+                audio: "rosanna/water_rosanna/물-로잔나 영입 (1).mp3"
+            },
+            {
+                id: "v_auto_1771314494",
+                label: "영웅 초월 1",
+                transcript: "어? 이건…!",
+                audio: "rosanna/water_rosanna/물-로잔나 초월.mp3"
+            },
+            {
+                id: "v_auto_1771314545",
+                label: "영웅 초월 2",
+                transcript: "뭐야…? 넌 어떻게 이런 걸 할 수 있지?",
+                audio: "rosanna/water_rosanna/물-로잔나 초월 (1).mp3"
+            },
+            {
+                id: "v_auto_1771314591",
+                label: "영웅 초월 3",
+                transcript: "야, 내 힘이 초기화 돼 버렸잖아!",
+                audio: "rosanna/water_rosanna/물-로잔나 초월 (2).mp3"
+            },
+            {
+                id: "v_auto_1771314716",
+                label: "영웅 초월 4",
+                transcript: "조금 상쾌해졌네.",
+                audio: "rosanna/water_rosanna/물-로잔나 초월 (3).mp3"
+            },
+            {
+                id: "v_auto_1771314733",
+                label: "영웅 초월 5",
+                transcript: "왜 네가 더 좋아하냐?",
+                audio: "rosanna/water_rosanna/물-로잔나 초월 (4).mp3"
+            },
+            {
+                id: "v_auto_1771314795",
+                label: "영웅 각성 1",
+                transcript: "이런 거 해도, 키가 자라거나 하진 않는다니까?",
+                audio: "rosanna/water_rosanna/물-로잔나 각성.mp3"
+            },
+            {
+                id: "v_auto_1771314821",
+                label: "영웅 각성 2",
+                transcript: "그럭저럭, 괜찮은 기분이야.",
+                audio: "rosanna/water_rosanna/물-로잔나 각성 (1).mp3"
+            },
+            {
+                id: "v_auto_1771314861",
+                label: "영웅 각성 3",
+                transcript: "훗! 날 즐겁게 하다니, 제법이네?",
+                audio: "rosanna/water_rosanna/물-로잔나 각성 (2).mp3"
+            },
+            {
+                id: "v_auto_1771314888",
+                label: "영웅 각성 4",
+                transcript: "뭐, 조금은 인정해 주지, 아주 조금이지만.",
+                audio: "rosanna/water_rosanna/물-로잔나 각성 (3).mp3"
+            },
+                        {
+                id: "v_auto_1771315371",
+                label: "타이틀 콜",
+                transcript: "Lord Of Heroes.",
+                audio: "rosanna/water_rosanna/물-로잔나 타이틀콜.mp3"
+            },
+            {
+                id: "v_auto_1771315410",
+                label: "영웅 화면 1",
+                transcript: "애송이 왔구나?",
+                audio: "rosanna/water_rosanna/물-로잔나 영웅창.mp3"
+            },
+                        {
+                id: "v_auto_1771317809",
+                label: "영웅 화면 2",
+                transcript: "자꾸 뭘 그렇게 휙휙 거리는 거야? 허, 너 설마, 내 키를 재어 보고 있는 거냐? 이 녀석이!",
+                audio: "rosanna/water_rosanna/물-로잔나 영웅창 (1).mp3"
+            },
+            {
+                id: "v_auto_1771317863",
+                label: "영웅 화면 3",
+                transcript: "단순히 노력만 해선, 원하는 걸 얻을 수 없어. 항상 생각을 하란 말이야, 생각을! 어떻게 해야 더 현명하게 시간을 사용할 수 있을지.",
+                audio: "rosanna/water_rosanna/물-로잔나 영웅창 (2).mp3"
+            },
+            {
+                id: "v_auto_1771317915",
+                label: "영웅 화면 4",
+                transcript: "감정은, 항상 적당히만 발산해라. 화력이 너무 강하면, 전부 타 버리게 마련이라고. …뭐? 내가 어때서?",
+                audio: "rosanna/water_rosanna/물-로잔나 영웅창 (3).mp3"
+            },
+            {
+                id: "v_auto_1771317957",
+                label: "영웅 화면 5",
+                transcript: "야, 설교는 적당히 해라. 그때는 내가 꼭 참고 들어줬지만, …이게! 어디 어른한테 까불어!",
+                audio: "rosanna/water_rosanna/물-로잔나 영웅창 (4).mp3"
+            },
+            {
+                id: "v_auto_1771317996",
+                label: "영웅 화면 6",
+                transcript: "빌라르 군도의 거친 바다는 유명하지. 나는 함선 하나로 모두 헤쳐나갔지만.",
+                audio: "rosanna/water_rosanna/물-로잔나 영웅창 (5).mp3"
+            },
+            {
+                id: "v_auto_1771318025",
+                label: "영웅 화면 7",
+                transcript: "인어에 대해서 물어보는 저 얼빠진 녀석들 좀 어떻게 해봐! 내가 그걸 왜 대답해 줘야 해?",
+                audio: "rosanna/water_rosanna/물-로잔나 영웅창 (6).mp3"
+            },
+            {
+                id: "v_auto_1771318062",
+                label: "영웅 화면 8",
+                transcript: "베로니카가 그립군. 심해 왕국으로 돌아가기 전에, 이야기를 더 많이 나눴어야 했어.",
+                audio: "rosanna/water_rosanna/물-로잔나 영웅창 (7).mp3"
+            },
+            {
+                id: "v_auto_1771318205",
+                label: "영웅 화면 9",
+                transcript: "너. 설마, 네가 무슨 전설이나 신화의 주인공이라고 생각하는 건 아니겠지? 지나친 자의식은 정신을 병들게 만드니까, 경계하도록 해.",
+                audio: "rosanna/water_rosanna/물-로잔나 영웅창 (8).mp3"
+            },
+            {
+                id: "v_auto_1771318253",
+                label: "영웅 화면 10",
+                transcript: "헬가는 잘 있나? 혹시, 푸대접 하는 건 아니겠지?",
+                audio: "rosanna/water_rosanna/물-로잔나 영웅창 (9).mp3"
+            },
+            {
+                id: "v_auto_1771318391",
+                label: "영웅 화면 11",
+                transcript: "사르디나에 피해를 끼치기만 해 봐! 세금을 올린다거나, 병사를 함부로 징벌한다거나! 뭐, 내가 하는 건 괜찮아! 뭐, 뭐!",
+                audio: "rosanna/water_rosanna/물-로잔나 영웅창 (10).mp3"
+            },
+            {
+                id: "v_auto_1771318448",
+                label: "영웅 화면 12",
+                transcript: "애송아, 네 능력이 대단하다는 건 인정해. 그래도 혼자서는 할 수 없는 일들이 있다는 것을, 꼭 기억해라.",
+                audio: "rosanna/water_rosanna/물-로잔나 영웅창 (11).mp3"
+            },
+            {
+                id: "v_auto_1771318493",
+                label: "영웅 화면 13",
+                transcript: "가끔은, 연장자를 공경해 봐. 자꾸 맞먹으려고 들면 예쁨을 받을 수가 없어요? 응?",
+                audio: "rosanna/water_rosanna/물-로잔나 영웅창 (12).mp3"
+            },
+            {
+                id: "v_auto_1771318556",
+                label: "영웅 화면 14",
+                transcript: "내가 계속 지켜봤는데, 너처럼 퍼주기 좋아하는 녀석이, 어떻게 그런 일들을 해낼 수 있었던 걸까? 참 신기하단 말이지.",
+                audio: "rosanna/water_rosanna/물-로잔나 영웅창 (13).mp3"
+            },
+            {
+                id: "v_auto_1771318596",
+                label: "영웅 화면 15",
+                transcript: "오래 산다고 그렇게 좋은 것도 아니다. 불로장생을 꿈꾸고 있다면, 차라리 매일매일을 가치 있게 살아가도록 해.",
+                audio: "rosanna/water_rosanna/물-로잔나 영웅창 (14).mp3"
+            },
+            {
+                id: "v_auto_1771318662",
+                label: "영웅 화면 16",
+                transcript: "남은 수명이 얼마나 되냐고? 야, 그게 할 소리냐? 어이가 없네. 가는 데 순서 없다고, 너부터 보내줄까?",
+                audio: "rosanna/water_rosanna/물-로잔나 영웅창 (15).mp3"
+            },
+            {
+                id: "v_auto_1771318710",
+                label: "영웅 화면 17",
+                transcript: "어어, 좋은 것 좀 가지고 왔냐?",
+                audio: "rosanna/water_rosanna/물-로잔나 영웅창 (16).mp3"
+            },
+            {
+                id: "v_auto_1771318755",
+                label: "영웅 화면 18",
+                transcript: "애송아, 자리를 좀 지키는 게 어때? 뭐, 기다린 건 아니야.",
+                audio: "rosanna/water_rosanna/물-로잔나 영웅창 (17).mp3"
+            },
+            {
+                id: "v_auto_1771318794",
+                label: "영웅 화면 19",
+                transcript: "왔냐? 지도자의 부재는, 혼란을 가져온다. 명심해!",
+                audio: "rosanna/water_rosanna/물-로잔나 영웅창 (18).mp3"
+            },
+            {
+                id: "v_auto_1771318848",
+                label: "영웅 화면 20",
+                transcript: "선물? 좋아, 가져와 봐! 마음에 들면 받아 줄 테니. …뭐? 내가 주는 쪽이라고?",
+                audio: "rosanna/water_rosanna/물-로잔나 영웅창 (19).mp3"
+            },
+            {
+                id: "v_auto_1771318886",
+                label: "영웅 화면 21",
+                transcript: "넌 애송이지만, 하면 할 수 있는 애송이잖냐. 믿고 있다!",
+                audio: "rosanna/water_rosanna/물-로잔나 영웅창 (20).mp3"
+            }
         ]
     },
        {
@@ -629,24 +833,24 @@ const HERO_DATA = [
             }
         ]
          },
-        {
-        id: "fire_laian",
-        name: "라이안",
-        element: "fire",
-        title: "미지를 비추는 용화",
-        image: "laian/fire_laian.png",
-        voices: [
-        ]
-    },
-        {
-        id: "fire_aurea",
-        name: "아우레아",
-        element: "fire",
-        title: "아발론의 재단사",
-        image: "aurea/fire_aurea.png",
-        voices: [
-        ]
-    },
+//        {
+//        id: "fire_laian",
+//        name: "라이안",
+//        element: "fire",
+//        title: "미지를 비추는 용화",
+//        image: "laian/fire_laian.png",
+//        voices: [
+//        ]
+//    },
+//        {
+//        id: "fire_aurea",
+//        name: "아우레아",
+//        element: "fire",
+//        title: "아발론의 재단사",
+//        image: "aurea/fire_aurea.png",
+//        voices: [
+//        ]
+//    },
         {
         id: "fire_joshua",
         name: "조슈아",
