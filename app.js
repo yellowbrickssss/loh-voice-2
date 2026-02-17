@@ -39,7 +39,6 @@ const PATCH_NOTES = (window.PATCH_NOTES && window.PATCH_NOTES.length)
                 "빛 즈라한",
                 "불 즈라한",
                 "물 즈라한",
-                "대지 자이라",
                 "빛 슈나이더",
                 "어둠 슈나이더",
                 "불 시프리에드",
