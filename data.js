@@ -1105,6 +1105,36 @@ const HERO_DATA = [
                 label: "영웅 화면 12",
                 transcript: "그래도, 특임대 녀석들이 없었으면 좀 심심하긴 했겠죠. 일일이 챙겨준다고 하는 것도 귀찮지만, 나쁘진 않았으니까.",
                 audio: "joshua/joshua (18).mp3"
+            },
+                        {
+                id: "v_auto_1771416289",
+                label: "영웅 화면 13",
+                transcript: "낮잠, 안 자고 있었습니다.",
+                audio: "joshua/joshua (19).mp3"
+            },
+            {
+                id: "v_auto_1771416322",
+                label: "영웅 화면 14",
+                transcript: "로드! 기다렸습니다. 휴가신청에 서명을 좀….",
+                audio: "joshua/joshua (20).mp3"
+            },
+            {
+                id: "v_auto_1771416351",
+                label: "영웅 화면 15",
+                transcript: "음, 별이 다섯 개…. 편하려나?",
+                audio: "joshua/joshua (21).mp3"
+            },
+            {
+                id: "v_auto_1771416422",
+                label: "영웅 화면 16",
+                transcript: "건강과 미용을 위해…. 식후 한잔의 홍차, 어떠십니까?",
+                audio: "joshua/joshua (22).mp3"
+            },
+            {
+                id: "v_auto_1771416461",
+                label: "영웅 화면 17",
+                transcript: "월급만큼의 일은 했습니다! 그 이상은, 더 많은 월급을 받는 이들에게 맡기도록 하죠.",
+                audio: "joshua/joshua (23).mp3"
             }
         ]
     }
