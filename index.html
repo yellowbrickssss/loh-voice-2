@@ -576,6 +576,16 @@
         }
         .center-group{display:flex;align-items:center;gap:12px;margin:0 auto}
         .right-group{margin-left:auto}
+        .left-group{display:flex;align-items:center;gap:12px}
+        .a11y-mobile-bar{display:none}
+        .a11y-info-wrapper{position:relative;display:inline-flex;align-items:center;justify-content:center}
+        .a11y-info-tooltip{position:absolute;left:0;top:120%;min-width:260px;max-width:320px;padding:10px 12px;border-radius:8px;background:rgba(8,11,18,0.96);border:1px solid rgba(137,196,244,0.4);box-shadow:0 10px 24px rgba(0,0,0,0.4);color:var(--text-main);font-size:11px;line-height:1.6;opacity:0;transform:translateY(-4px);pointer-events:none;z-index:10;transition:opacity .16s ease,transform .16s ease}
+        .a11y-info-tooltip p{margin:0 0 4px}
+        .a11y-info-tooltip p:last-child{margin-bottom:0}
+        .a11y-info-wrapper:hover .a11y-info-tooltip,
+        .a11y-info-wrapper:focus-within .a11y-info-tooltip{opacity:1;transform:translateY(0);pointer-events:auto}
+        .a11y-info-wrapper .mb-btn{cursor:default}
+        .a11y-info-wrapper .mb-btn:hover{cursor:help}
         .mb-btn {
             background: rgba(137,196,244,0.08);
             border: 1px solid rgba(137,196,244,0.16);
@@ -610,6 +620,14 @@
             width: 18px;
             height: 18px;
             fill: #cfe6f9;
+        }
+        .icon-a11y {
+            width: 18px;
+            height: 18px;
+            background-color: #cfe6f9;
+            -webkit-mask: url('accessibility.png') no-repeat center / contain;
+            mask: url('accessibility.png') no-repeat center / contain;
+            display: inline-block;
         }
         #mbPlay .icon { display: none; }
         #mbPlay .icon-play { display: inline; }
@@ -895,6 +913,34 @@
                 align-self: flex-end;
             }
             .music-bar {height:52px;padding:8px 12px}
+            .music-bar .left-group { display:none; }
+            .a11y-mobile-bar {
+                display:flex;
+                align-items:center;
+                gap:8px;
+                margin-top:8px;
+                margin-left:72px;
+            }
+            .a11y-mobile-bar .mb-btn {
+                padding:4px 6px;
+            }
+            .a11y-mobile-bar .icon,
+            .a11y-mobile-bar .icon-a11y {
+                width:16px;
+                height:16px;
+            }
+            .a11y-info-tooltip {
+                min-width:230px;
+                max-width:calc(100vw - 40px);
+                left:50%;
+                right:auto;
+                top:calc(100% + 8px);
+                transform:translate(-50%, -4px);
+            }
+            .a11y-info-wrapper:hover .a11y-info-tooltip,
+            .a11y-info-wrapper:focus-within .a11y-info-tooltip {
+                transform:translate(-50%, 0);
+            }
             .music-accordion {
                 top: 52px;
                 right: 12px;
@@ -926,6 +972,145 @@
             body { padding-bottom: 100px; box-sizing: border-box; }
         }
 
+        .receipt-widget {
+            margin-top: 12px;
+        }
+        .receipt-widget.hidden {
+            display: none;
+        }
+        .receipt-toggle-btn {
+            padding: 6px 10px;
+            border-radius: 18px;
+            border: 1px solid rgba(148, 163, 184, 0.8);
+            background: rgba(15, 23, 42, 0.9);
+            color: #e2e8f0;
+            font-size: 11px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 16px;
+        }
+        .receipt-toggle-btn:hover {
+            background: rgba(30, 41, 59, 0.95);
+        }
+        .receipt-paper {
+            background: #fff;
+            width: 260px;
+            padding: 14px 16px 22px 16px;
+            box-shadow: 0 0 18px rgba(0, 0, 0, 0.65);
+            font-family: "Share Tech Mono", monospace;
+            text-align: left;
+            color: #222;
+            transform: rotate(-1.2deg);
+            position: relative;
+            letter-spacing: -0.4px;
+            line-height: 1.35;
+        }
+        .receipt-paper::before {
+            content: "";
+            position: absolute;
+            top: -8px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(135deg, transparent 50%, #fff 50%), linear-gradient(225deg, transparent 50%, #fff 50%);
+            background-position: 0 0;
+            background-size: 8px 8px;
+            background-repeat: repeat-x;
+        }
+        .receipt-paper::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(135deg, #fff 50%, transparent 50%), linear-gradient(225deg, #fff 50%, transparent 50%);
+            background-position: 0 0;
+            background-size: 8px 8px;
+            background-repeat: repeat-x;
+        }
+        .receipt-title {
+            font-size: 16px;
+            text-transform: lowercase;
+            letter-spacing: 0.14em;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+        .receipt-divider {
+            border-bottom: 1px dashed #000;
+            margin: 6px 0 8px;
+        }
+        .receipt-label {
+            font-size: 11px;
+            margin-bottom: 2px;
+        }
+        .receipt-quote {
+            font-size: 12px;
+            margin-bottom: 8px;
+            word-break: keep-all;
+        }
+        .receipt-hero-meta {
+            font-size: 11px;
+            text-align: right;
+            margin-bottom: 8px;
+        }
+        .receipt-section-heading {
+            font-size: 11px;
+            text-transform: lowercase;
+            margin-bottom: 2px;
+        }
+        .receipt-daily-value {
+            font-size: 10px;
+            margin-bottom: 6px;
+        }
+        .receipt-ingredients-container {
+            border-top: 1px dashed #000;
+            margin: 8px 0;
+            padding-top: 6px;
+            font-size: 10px;
+        }
+        .receipt-ingredient-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+        }
+        .receipt-ingredient-label {
+            font-weight: 600;
+            color: #000;
+            flex: 0 0 auto;
+            margin-right: 10px;
+        }
+        .receipt-ingredient-data {
+            text-align: right;
+            color: #333;
+            flex: 1 1 auto;
+            word-break: break-all;
+        }
+        .receipt-barcode {
+            height: 42px;
+            margin: 10px 0 4px;
+            background-image: repeating-linear-gradient(
+                to right,
+                #000,
+                #000 2px,
+                transparent 2px,
+                transparent 4px
+            );
+            opacity: 0.85;
+        }
+        .receipt-serial {
+            font-size: 10px;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+        .receipt-footer {
+            font-size: 11px;
+            text-align: center;
+        }
+
     </style>
 </head>
 <body>
@@ -939,6 +1124,37 @@
         </div>
     </div>
     <div class="music-bar">
+        <div class="left-group">
+            <div class="a11y-info-wrapper">
+                <button class="mb-btn" id="mbA11yMusic" aria-label="배경음악과 음성 컨텐츠 안내" aria-describedby="a11yTipMusic">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M10 4v9.1A3.9 3.9 0 0 0 8 13c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3V8h6V4h-7z"></path>
+                    </svg>
+                </button>
+                <div class="a11y-info-tooltip" id="a11yTipMusic" role="tooltip">
+                    <p>배경음악과 음성 컨텐츠를 포함하고 있습니다.</p>
+                </div>
+            </div>
+            <div class="a11y-info-wrapper">
+                <button class="mb-btn" id="mbA11yAlt" aria-label="ALT 대체 텍스트 안내" aria-describedby="a11yTipAlt">
+                    <span class="icon-a11y" aria-hidden="true"></span>
+                </button>
+                <div class="a11y-info-tooltip" id="a11yTipAlt" role="tooltip">
+                    <p>ALT 대체 텍스트를 지원합니다.</p>
+                </div>
+            </div>
+            <div class="a11y-info-wrapper">
+                <button class="mb-btn" id="mbA11yContext" aria-label="마우스 우클릭 제한 안내" aria-describedby="a11yTipContext">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="12" r="8" fill="none" stroke="#cfe6f9" stroke-width="1.8"></circle>
+                        <line x1="8" y1="8" x2="16" y2="16" stroke="#cfe6f9" stroke-width="1.8" stroke-linecap="round"></line>
+                    </svg>
+                </button>
+                <div class="a11y-info-tooltip" id="a11yTipContext" role="tooltip">
+                    <p>마우스 우클릭이 금지됩니다. 드래그, 복사는 가능합니다.</p>
+                </div>
+            </div>
+        </div>
         <div class="center-group">
             <button class="mb-btn" id="mbPlay" aria-label="Play/Pause">
                 <svg class="icon icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -989,6 +1205,37 @@
 
     <div class="app-container">
         <img class="brand-logo" src="lord%20of%20heros.png" alt="Lord of Heroes">
+        <div class="a11y-mobile-bar">
+            <div class="a11y-info-wrapper">
+                <button class="mb-btn" id="mbA11yMusicMobile" aria-label="배경음악과 음성 컨텐츠 안내" aria-describedby="a11yTipMusicMobile">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M10 4v9.1A3.9 3.9 0 0 0 8 13c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3V8h6V4h-7z"></path>
+                    </svg>
+                </button>
+                <div class="a11y-info-tooltip" id="a11yTipMusicMobile" role="tooltip">
+                    <p>배경음악과 음성 컨텐츠를 포함하고 있습니다.</p>
+                </div>
+            </div>
+            <div class="a11y-info-wrapper">
+                <button class="mb-btn" id="mbA11yAltMobile" aria-label="ALT 대체 텍스트 안내" aria-describedby="a11yTipAltMobile">
+                    <span class="icon-a11y" aria-hidden="true"></span>
+                </button>
+                <div class="a11y-info-tooltip" id="a11yTipAltMobile" role="tooltip">
+                    <p>ALT 대체 텍스트를 지원합니다.</p>
+                </div>
+            </div>
+            <div class="a11y-info-wrapper">
+                <button class="mb-btn" id="mbA11yContextMobile" aria-label="마우스 우클릭 제한 안내" aria-describedby="a11yTipContextMobile">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="12" r="8" fill="none" stroke="#cfe6f9" stroke-width="1.8"></circle>
+                        <line x1="8" y1="8" x2="16" y2="16" stroke="#cfe6f9" stroke-width="1.8" stroke-linecap="round"></line>
+                    </svg>
+                </button>
+                <div class="a11y-info-tooltip" id="a11yTipContextMobile" role="tooltip">
+                    <p>마우스 우클릭이 금지됩니다. 드래그, 복사는 가능합니다.</p>
+                </div>
+            </div>
+        </div>
         
         <!-- Left: Hero Selection -->
         <aside class="hero-list">
@@ -1016,7 +1263,29 @@
 
         <!-- Middle: Voice List -->
         <section class="voice-list-section">
-             <!-- Dynamic Content will be loaded here via app.js -->
+            <div class="voice-list-inner">
+                 <!-- Dynamic Content will be loaded here via app.js -->
+            </div>
+            <button class="receipt-toggle-btn" id="receiptToggle" type="button" aria-label="영웅 대사 영수증 열기/닫기">
+                🧾
+            </button>
+            <div class="receipt-widget hidden" id="receiptWidget" role="group" aria-label="로드오브히어로즈 영웅 대사 영수증">
+                <div class="receipt-paper">
+                    <div class="receipt-title">receipt</div>
+                    <div class="receipt-divider"></div>
+                    <div class="receipt-label">The Hero said… :</div>
+                    <div class="receipt-quote" id="receiptQuote"></div>
+                    <div class="receipt-hero-meta" id="receiptHeroMeta"></div>
+                    <div class="receipt-divider"></div>
+                    <div class="receipt-section-heading">ingredients</div>
+                    <div class="receipt-daily-value">Daily Value ∞</div>
+                    <div class="receipt-ingredients-container" id="receiptIngredients"></div>
+                    <div class="receipt-divider"></div>
+                    <div class="receipt-barcode"></div>
+                    <div class="receipt-serial" id="receiptSerial"></div>
+                    <div class="receipt-footer">"로드! 또 와 줄 거지?"</div>
+                </div>
+            </div>
         </section>
 
         <div class="v-divider"></div>
@@ -1046,6 +1315,9 @@
 
     </div>
     
+
+    <!-- Flaticon Attribution -->
+    <a href="https://www.flaticon.com/kr/free-icons/" title="접근성 아이콘" style="display:none">접근성 아이콘 제작자: Flaticon</a>
 
     <!-- Patch Notes Modal -->
     <div class="patch-modal-overlay" id="patchModal" aria-hidden="true">

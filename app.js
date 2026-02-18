@@ -105,6 +105,7 @@ function init() {
     if (HERO_DATA.length > 0) {
         selectHero(HERO_DATA[0].id);
     }
+    initReceiptWidget();
     setTimeout(() => {
         initMusicBar();
         initIntro();
@@ -113,8 +114,6 @@ function init() {
         initPatchNotes();
     }, 0);
 }
-
-init();
 
 // 1. Render Hero List (Left Column)
     function normalizeText(text){
@@ -508,8 +507,9 @@ init();
     }
 
     function renderVoiceList(hero) {
-        voiceListEl.innerHTML = `<div class="section-title">Voice Records | ${hero.name}</div><div class="voice-scroll"></div>`;
-        const scrollEl = voiceListEl.querySelector('.voice-scroll');
+        const container = voiceListEl.querySelector('.voice-list-inner') || voiceListEl;
+        container.innerHTML = `<div class="section-title">Voice Records | ${hero.name}</div><div class="voice-scroll"></div>`;
+        const scrollEl = container.querySelector('.voice-scroll');
 
         hero.voices.forEach(voice => {
             const voiceItem = document.createElement('div');
@@ -617,3 +617,151 @@ init();
         ensureFooterProgress();
         renderUploadProgress();
     }
+
+    const RECEIPT_ELEMENT_LABELS = {
+        fire: "불",
+        water: "물",
+        earth: "대지",
+        light: "빛",
+        dark: "어둠"
+    };
+    const RECEIPT_INGREDIENTS_RANDOM = [
+        { label: "루인이 건넨 커피 ..." },
+        { label: "훈련장의 온도..." },
+        { label: "루인의 잔소리..." },
+        { label: "기물 파손..." },
+        { label: "오벨리스크의 환영..." },
+        { label: "재앙의 숨결..." },
+        { label: "모스레간테의 불꽃..." },
+        { label: "해신의 비늘..." },
+        { label: "인연의 돌...." },
+        { label: "삼거리 제과점의 좋은 냄새..." },
+        { label: "바네사의 음악 소리...." },
+        { label: "8-16 황제가 맞은 횟수... nnnn회", unit: "회", min: 1000, max: 9999 },
+        { label: "당신이 악몽에 주차한 기간... nn일", unit: "일", min: 3, max: 365 },
+        { label: "카를 3세의 허세...", unit: "%", min: 100, max: 9999 },
+        { label: "조슈아의 휴가신청서 반려 횟수... nn번", unit: "번", min: 3, max: 999 },
+        { label: "여행자가 넘어진 횟수 .... nnn회", unit: "회", min: 10, max: 999 },
+        { label: "미리안드의 차단마법 ... nnn회", unit: "회", min: 10, max: 999 },
+        { label: "온달이 '가우리'라고 말한 횟수... nnnn회", unit: "회", min: 1000, max: 9999 },
+        { label: "시프리에드의 잔소리..." },
+        { label: "요한이 좋아하는 맥주..." },
+        { label: "프라우의 메타발언... nnn회", unit: "회", min: 10, max: 999 },
+        { label: "프람의 감자 포타주..." },
+        { label: "정령의 기운..." },
+        { label: "가시나무의 탄의 위력..." },
+        { label: "나인의 흑염룡..." },
+        { label: "루미에의 수다..." },
+        { label: "바레타의 로열 스트레이트 플래쉬..." },
+        { label: "사르디나 여관의 아침..." }
+    ];
+    function initReceiptWidget(){
+        const root = document.getElementById('receiptWidget');
+        if (!root) return;
+        const quoteEl = document.getElementById('receiptQuote');
+        const heroEl = document.getElementById('receiptHeroMeta');
+        const ingEl = document.getElementById('receiptIngredients');
+        const serialEl = document.getElementById('receiptSerial');
+        if (!quoteEl || !heroEl || !ingEl || !serialEl) return;
+
+        const toggleBtn = document.getElementById('receiptToggle');
+        if (toggleBtn) {
+            let open = false;
+            function sync(){
+                root.classList.toggle('hidden', !open);
+                toggleBtn.setAttribute('aria-pressed', open ? 'true' : 'false');
+            }
+            toggleBtn.addEventListener('click', ()=>{
+                open = !open;
+                sync();
+            });
+            sync();
+        }
+
+        const pool = buildHeroVoicePool();
+        const pair = pool.length ? pickRandom(pool) : null;
+
+        if (pair && pair.hero && pair.voice) {
+            quoteEl.textContent = `"${pair.voice.transcript}"`;
+            const elementLabel = RECEIPT_ELEMENT_LABELS[pair.hero.element] || pair.hero.element || "";
+            heroEl.textContent = elementLabel ? `${pair.hero.name} / ${elementLabel}` : pair.hero.name;
+        } else {
+            quoteEl.textContent = '"..."';
+            heroEl.textContent = "영웅 데이터 없음";
+        }
+
+        const ingredients = pickRandomIngredients();
+        ingEl.innerHTML = "";
+        ingredients.forEach(item=>{
+            const row = document.createElement('div');
+            row.className = 'receipt-ingredient-item';
+            const labelSpan = document.createElement('span');
+            labelSpan.className = 'receipt-ingredient-label';
+            labelSpan.textContent = item.label;
+            const valueSpan = document.createElement('span');
+            valueSpan.className = 'receipt-ingredient-data';
+            valueSpan.textContent = buildIngredientValue(item);
+            row.appendChild(labelSpan);
+            row.appendChild(valueSpan);
+            ingEl.appendChild(row);
+        });
+
+        const count = getReceiptVisitCount();
+        const serial = formatSerialNumber(count);
+        serialEl.textContent = `일련번호 ${serial}`;
+    }
+    function buildHeroVoicePool(){
+        const pool = [];
+        if (!Array.isArray(HERO_DATA)) return pool;
+        HERO_DATA.forEach(hero=>{
+            const voices = hero && Array.isArray(hero.voices) ? hero.voices : [];
+            voices.forEach(voice=>{
+                pool.push({ hero, voice });
+            });
+        });
+        return pool;
+    }
+    function pickRandom(list){
+        if (!Array.isArray(list) || !list.length) return null;
+        const index = Math.floor(Math.random()*list.length);
+        return list[index];
+    }
+    function pickRandomIngredients(){
+        const base = { label: "충성심", fixed: "5000%" };
+        const pool = RECEIPT_INGREDIENTS_RANDOM.slice();
+        const selected = [];
+        while (pool.length && selected.length < 4){
+            const index = Math.floor(Math.random()*pool.length);
+            selected.push(pool.splice(index,1)[0]);
+        }
+        return [base].concat(selected);
+    }
+    function buildIngredientValue(item){
+        if (!item) return "";
+        if (item.fixed) return item.fixed;
+        const min = typeof item.min === "number" ? item.min : 50;
+        const max = typeof item.max === "number" ? item.max : 5000;
+        const value = Math.floor(Math.random()*(max-min+1))+min;
+        const unit = item.unit || "%";
+        return String(value)+unit;
+    }
+    function getReceiptVisitCount(){
+        const key = "loh_receipt_visit_count";
+        try {
+            const raw = window.localStorage.getItem(key);
+            const current = raw ? parseInt(raw,10)||0 : 0;
+            const next = current + 1;
+            window.localStorage.setItem(key, String(next));
+            return next;
+        } catch (e){
+            return 1;
+        }
+    }
+    function formatSerialNumber(count){
+        const base = "20250214-";
+        const safe = typeof count === "number" && isFinite(count) ? count : 1;
+        const padded = String(safe).padStart(8,"0");
+        return base + padded;
+    }
+
+init();
