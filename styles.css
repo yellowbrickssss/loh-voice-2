@@ -885,13 +885,15 @@ body {
     }
     .bottom-footer .upload-progress { display: flex; }
     .transcript-section .upload-progress { display: none; }
-    .voice-list-section {
+    .voice-column {
         margin-left: 0;
         margin-top: 20px;
         flex: 0 0 auto;
         order: 2;
-        overflow: visible;
         margin-bottom: 12px;
+    }
+    .voice-list-section {
+        overflow: visible;
         -webkit-overflow-scrolling: touch;
         max-height: none;
     }
@@ -1009,7 +1011,10 @@ body {
         border-radius: 999px;
         font-size: 13px;
     }
-}
+    .app-container .voice-column .receipt-toggle-btn {
+        align-self: center;
+    }
+    }
 
 .receipt-shell {
     z-index: 8;
