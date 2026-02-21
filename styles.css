@@ -90,6 +90,7 @@ body {
     align-items: center;
     gap: 20px;
     padding-right: 30px;
+    padding-bottom: 30px;
     border-right: 1px solid rgba(255,255,255,0.03);
     overflow-y: auto;
     scrollbar-width: none;
@@ -263,9 +264,14 @@ body {
 /* 
     2. Middle: Voice List
 */
-.voice-list-section {
+.voice-column {
     flex: 0 0 400px;
     margin-left: 60px; /* Generous spacing */
+    display: flex;
+    flex-direction: column;
+}
+.voice-list-section {
+    flex: 1;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
@@ -1038,6 +1044,10 @@ body {
     gap: 6px;
     margin-top: 0;
 }
+.voice-column .receipt-toggle-btn {
+    margin-top: 20px;
+    align-self: flex-start;
+}
 .receipt-toggle-btn:hover {
     background: rgba(30, 41, 59, 0.95);
 }
@@ -1156,15 +1166,6 @@ body {
 .receipt-footer {
     font-size: 11px;
     text-align: center;
-}
-
-@media (min-width: 901px) {
-    .receipt-shell {
-        position: fixed;
-        left: 320px;
-        bottom: 48px;
-        align-items: flex-start;
-    }
 }
 
 @media (max-width: 900px) {

@@ -155,12 +155,17 @@
             </div>
         </aside>
 
-        <!-- Middle: Voice List -->
-        <section class="voice-list-section">
-            <div class="voice-list-inner">
-                 <!-- Dynamic Content will be loaded here via app.js -->
-            </div>
-        </section>
+        <div class="voice-column">
+            <!-- Middle: Voice List -->
+            <section class="voice-list-section">
+                <div class="voice-list-inner">
+                     <!-- Dynamic Content will be loaded here via app.js -->
+                </div>
+            </section>
+            <button class="receipt-toggle-btn" id="receiptToggle" type="button" aria-label="영웅 대사 영수증 열기/닫기">
+                🧾 Entry Permit
+            </button>
+        </div>
 
         <div class="v-divider"></div>
 
@@ -169,9 +174,6 @@
              <!-- Dynamic Content will be loaded here via app.js -->
         </section>
         <div class="receipt-shell">
-            <button class="receipt-toggle-btn" id="receiptToggle" type="button" aria-label="영웅 대사 영수증 열기/닫기">
-                🧾 Entry Permit
-            </button>
             <div class="receipt-widget hidden" id="receiptWidget" role="group" aria-label="로드오브히어로즈 영웅 대사 영수증">
                 <div class="receipt-paper">
                     <div class="receipt-title">entry permit</div>
