@@ -492,7 +492,7 @@ body {
 
 .quote-text {
     font-size: 1.2rem;
-    line-height: 1.8;
+    line-height: 1.6;
     font-weight: 300;
     color: #e2e8f0;
     position: relative;
@@ -500,6 +500,12 @@ body {
     border-left: 1px solid var(--accent-line);
     word-break: keep-all;
     overflow-wrap: break-word;
+}
+
+@media (max-width: 900px) {
+    .quote-text {
+        font-size: 0.9rem;
+    }
 }
 
 .quote-meta {
