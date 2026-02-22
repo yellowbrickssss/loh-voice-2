@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube 썸네일 추출기 (PNG)</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #444;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 25px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: block;
+            margin: 0 auto;
+        }
+        .download-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .download-btn:hover {
+            background-color: #218838;
+        }
+        .error {
+            color: #dc3545;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>YouTube 썸네일 추출기 (PNG 변환)</h1>
+    <input type="text" id="urlInput" placeholder="YouTube 영상 URL을 입력하세요 (예: https://youtu.be/...)" />
+    <button id="extractBtn">썸네일 추출하기</button>
+    <div id="result"></div>
+</div>
+
+<script>
+    const extractBtn = document.getElementById('extractBtn');
+    const urlInput = document.getElementById('urlInput');
+    const resultDiv = document.getElementById('result');
+
+    extractBtn.addEventListener('click', () => {
+        const url = urlInput.value.trim();
+        if (!url) {
+            alert('URL을 입력해주세요.');
+            return;
+        }
+
+        const videoId = getVideoId(url);
+        if (!videoId) {
+            alert('올바른 YouTube URL이 아닙니다.');
+            return;
+        }
+
+        extractThumbnail(videoId);
+    });
+
+    // YouTube URL에서 Video ID 추출 정규식
+    function getVideoId(url) {
+        const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+        const match = url.match(regExp);
+        return (match && match[7].length === 11) ? match[7] : false;
+    }
+
+    function extractThumbnail(videoId) {
+        resultDiv.innerHTML = '<p>이미지 로딩 중...</p>';
+        
+        // 고화질 썸네일 URL (maxresdefault)
+        // 만약 maxresdefault가 없는 경우를 대비해 hqdefault로 fallback 할 수도 있지만,
+        // 보통 1080p 이상 영상은 maxres가 존재합니다.
+        const imageUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+        
+        const img = new Image();
+        img.crossOrigin = "Anonymous"; // CORS 문제 해결을 위해 필수
+        
+        img.onload = () => {
+            // 캔버스에 그리기 (JPG -> PNG 변환을 위해)
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+            
+            try {
+                // 캔버스 데이터를 PNG Data URL로 변환
+                const pngDataUrl = canvas.toDataURL('image/png');
+                
+                // 결과 표시
+                resultDiv.innerHTML = '';
+                
+                const displayImg = document.createElement('img');
+                displayImg.src = pngDataUrl;
+                displayImg.alt = "썸네일 이미지";
+                
+                const downloadLink = document.createElement('a');
+                downloadLink.href = pngDataUrl;
+                downloadLink.download = `thumbnail_${videoId}.png`;
+                downloadLink.textContent = 'PNG로 다운로드';
+                downloadLink.className = 'download-btn';
+                
+                resultDiv.appendChild(displayImg);
+                resultDiv.appendChild(downloadLink);
+                
+            } catch (e) {
+                console.error(e);
+                resultDiv.innerHTML = `<p class="error">이미지 변환 중 오류가 발생했습니다.<br>브라우저 보안 정책(CORS)으로 인해 변환이 차단되었을 수 있습니다.</p>`;
+            }
+        };
+        
+        img.onerror = () => {
+            // maxresdefault 로드 실패 시 hqdefault 시도
+            if (img.src.includes('maxresdefault')) {
+                img.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+            } else {
+                resultDiv.innerHTML = '<p class="error">썸네일을 불러올 수 없습니다. 올바른 영상인지 확인해주세요.</p>';
+            }
+        };
+        
+        img.src = imageUrl;
+    }
+</script>
+
+</body>
+</html>

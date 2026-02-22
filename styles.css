@@ -1059,6 +1059,21 @@ body {
 .receipt-toggle-btn:hover {
     background: rgba(30, 41, 59, 0.95);
 }
+
+.voice-bottom-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    align-self: flex-start;
+}
+.voice-column .voice-bottom-actions .receipt-toggle-btn {
+    margin: 0;
+}
+a.receipt-toggle-btn {
+    text-decoration: none;
+}
+
 .receipt-paper {
     background: #fff;
     width: 350px;

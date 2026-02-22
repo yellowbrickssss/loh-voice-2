@@ -1,0 +1,498 @@
+/* =========================================
+   Wunderkammer Player - Minimal Transparent Glass (Movies LP Version)
+   Refined to match Main Theme (styles.css)
+   ========================================= */
+
+@font-face{font-family:'Suit';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Thin.woff2') format('woff2');font-weight:100;font-display:swap}
+@font-face{font-family:'Suit';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-ExtraLight.woff2') format('woff2');font-weight:200;font-display:swap}
+@font-face{font-family:'Suit';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Light.woff2') format('woff2');font-weight:300;font-display:swap}
+@font-face{font-family:'Suit';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Suit';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Suit';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Suit';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Suit';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-ExtraBold.woff2') format('woff2');font-weight:800;font-display:swap}
+@font-face{font-family:'Suit';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Heavy.woff2') format('woff2');font-weight:900;font-display:swap}
+
+:root {
+    /* Palette: Deep Night Sky & Emotional Blue (From styles.css) */
+    --bg-deep: #080b12;
+    --bg-navy: #131b2e;
+    
+    --accent-primary: #89c4f4; /* Softer Sky Blue */
+    --accent-glow: rgba(137, 196, 244, 0.4);
+    --accent-line: rgba(137, 196, 244, 0.2);
+    
+    --text-main: #f0f4f8;
+    --text-muted: #94a3b8;
+    
+    /* Glassmorphism: Thin Sheet Style */
+    --glass-surface: linear-gradient(
+        120deg, 
+        rgba(255, 255, 255, 0.03) 0%, 
+        rgba(255, 255, 255, 0.01) 100%
+    );
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-highlight: rgba(255, 255, 255, 0.15);
+
+    --f-sans: 'Suit', 'Pretendard', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: var(--f-sans);
+    background-color: var(--bg-deep);
+    background: radial-gradient(circle at 50% -20%, #1a2744 0%, var(--bg-deep) 60%);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to top for scrolling content */
+    overflow-y: auto; /* Enable full page scroll */
+    padding-top: 40px; /* Add padding for visual balance */
+}
+
+/* Background Stars/Particles (Copied from styles.css) */
+.stars {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    background-image: 
+        radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.3) 50%, transparent 100%),
+        radial-gradient(1px 1px at 50% 10%, rgba(255,255,255,0.2) 50%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 80% 40%, rgba(255,255,255,0.25) 50%, transparent 100%),
+        radial-gradient(1px 1px at 10% 80%, rgba(255,255,255,0.2) 50%, transparent 100%),
+        radial-gradient(2px 2px at 90% 90%, rgba(255,255,255,0.15) 50%, transparent 100%);
+    z-index: 0;
+    opacity: 0.6;
+}
+
+.player-wrapper {
+    width: 100%;
+    max-width: 1400px; /* Wider for 2 columns */
+    padding: 60px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align center */
+    gap: 60px;
+    position: relative;
+    z-index: 1;
+}
+
+#sect-playlist {
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    padding: 0;
+    box-sizing: border-box;
+}
+#sect-playlist h2 {
+    letter-spacing: 4px;
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-bottom: 30px;
+    color: var(--accent-primary);
+    text-shadow: 0 0 10px var(--accent-glow);
+}
+
+.lp-player {
+    position: relative;
+    margin-bottom: 25px;
+    padding: 30px;
+    width: 100%;
+    overflow: visible;
+    contain: none;
+    
+    /* Refined Glass Style */
+    background: var(--glass-surface);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+.lp-player::before,
+.lp-player::after { content: none; display: none; }
+
+.lp-corner-tl, .lp-corner-tr, .lp-corner-bl, .lp-corner-br {
+    display: none !important;
+}
+
+.gramophone-body {
+    position: absolute;
+    z-index: 4;
+    right: -20px; /* Adjusted position */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 280px;
+    height: 280px;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));
+    pointer-events: none;
+}
+
+.lp-left-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 25px;
+    /* transform: translate(20px, 20px); removed for center alignment */
+}
+
+.lp-record-with-soundwave {
+    position: relative;
+    z-index: 1;
+    overflow: visible;
+    width: 300px;
+    height: 300px;
+    max-width: 100%;
+    margin: 0 auto 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lp-soundwave,
+.lp-soundwave-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    pointer-events: none;
+    width: 160%;
+    height: 160%;
+    overflow: visible !important;
+    opacity: 0.5;
+}
+.lp-soundwave .soundwave-canvas,
+.lp-record-with-soundwave .lp-soundwave-ring .soundwave-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    pointer-events: none;
+}
+
+.lp-record-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.lp-disc {
+    --lp-base: #3a2818;
+    --lp-dark: #1a100a;
+    position: absolute;
+    left: 50%; /* Default hidden/centered state */
+    top: 50%;
+    margin-left: -90px;
+    margin-top: -90px;
+    z-index: 3;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        radial-gradient(circle at center, transparent 12%, var(--lp-dark) 13%),
+        radial-gradient(circle at center, transparent 30%, var(--lp-dark) 31%),
+        repeating-radial-gradient(circle at center,
+            transparent 0px,
+            rgba(0,0,0,0.5) 1px,
+            transparent 2px,
+            rgba(0,0,0,0.35) 3px,
+            transparent 4px
+        ),
+        radial-gradient(circle at center, var(--lp-base) 0%, var(--lp-dark) 100%);
+    box-shadow:
+        inset 0 0 60px rgba(0,0,0,0.4),
+        0 5px 20px rgba(0,0,0,0.6);
+    animation: lpSpin 1.8s linear infinite;
+    animation-play-state: paused;
+    transition: left 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.lp-player.playing .lp-disc { 
+    animation-play-state: running; 
+    left: 35%; /* Slide out to the left (was 65%) */
+}
+@keyframes lpSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.lp-disc::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.1) 0%,
+        transparent 40%,
+        transparent 60%,
+        rgba(255,255,255,0.05) 100%
+    );
+    pointer-events: none;
+}
+.lp-disc::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.1),
+        inset 0 0 0 3px rgba(0,0,0,0.3);
+}
+
+.lp-label {
+    width: 38%;
+    height: 38%;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+    background: #eee;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.15);
+}
+.lp-label img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.lp-track-info {
+    text-align: center;
+    margin-bottom: 25px;
+    padding: 0 20px;
+}
+.lp-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.lp-artist {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-weight: 300;
+}
+
+.lp-progress {
+    width: 90%;
+    margin: 0 auto 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.lp-progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    overflow: visible; /* Changed from hidden to visible for handle */
+}
+.lp-progress-fill {
+    width: 0%;
+    height: 100%;
+    background: var(--accent-primary);
+    border-radius: 2px;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 8px var(--accent-glow);
+    position: relative; /* For handle positioning */
+}
+.lp-progress-fill::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+    z-index: 10;
+}
+.lp-progress-time {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.lp-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 15px;
+}
+.lp-controls button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-main);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.lp-ctrl-side {
+    font-size: 1.2rem;
+    opacity: 0.6;
+    color: var(--text-muted);
+}
+.lp-ctrl-side:hover { 
+    opacity: 1; 
+    transform: scale(1.1);
+    color: var(--accent-primary);
+}
+.lp-ctrl-side.active {
+    color: var(--accent-primary);
+    opacity: 1;
+    text-shadow: 0 0 8px var(--accent-glow);
+}
+.lp-ctrl-main {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--text-main);
+    font-size: 1.4rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.lp-ctrl-main:hover {
+    transform: scale(1.05);
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: var(--bg-deep);
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.lp-playlist {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: rgba(0,0,0,0.2);
+    border-radius: 0 0 12px 12px;
+}
+.lp-player:hover .lp-playlist { max-height: 250px; overflow-y: auto; }
+
+/* Scrollbar for playlist */
+.lp-playlist::-webkit-scrollbar { width: 4px; }
+.lp-playlist::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+}
+
+.lp-pl-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    cursor: pointer;
+    transition: background 0.2s;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+.lp-pl-item:last-child { border-bottom: none; }
+.lp-pl-item:hover { 
+    background: rgba(255,255,255,0.05); 
+    color: var(--text-main);
+}
+.lp-pl-item.active {
+    background: rgba(137, 196, 244, 0.1);
+    font-weight: 500;
+    color: var(--accent-primary);
+    border-left: 3px solid var(--accent-primary);
+}
+.lp-pl-idx {
+    width: 24px;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.3);
+    margin-right: 10px;
+    font-family: 'Share Tech Mono', monospace;
+}
+.lp-pl-info { display: flex; flex-direction: column; }
+.lp-pl-title { font-size: 0.95rem; margin-bottom: 2px; }
+/* =========================================
+   RESPONSIVE DESIGN (Mobile & Tablet)
+   ========================================= */
+@media (max-width: 1024px) {
+    .player-wrapper {
+        flex-direction: column;
+        padding: 20px;
+        gap: 40px;
+        justify-content: flex-start;
+    }
+
+    #sect-playlist {
+        max-width: 100%;
+        margin-bottom: 0;
+    }
+
+    .lp-player {
+        padding: 20px;
+    }
+    
+    .lp-left-section {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-top: 10px;
+    }
+    
+    .player-wrapper {
+        padding: 15px;
+        gap: 30px;
+    }
+    
+    .gramophone-body {
+        width: 200px;
+        height: 200px;
+        right: -10px;
+    }
+    
+    .lp-record-with-soundwave {
+        width: 240px;
+        height: 240px;
+    }
+    
+    .lp-disc {
+        width: 140px;
+        height: 140px;
+        margin-left: -70px;
+        margin-top: -70px;
+    }
+    
+    .lp-controls {
+        gap: 15px;
+    }
+    
+    .lp-ctrl-main {
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
+    }
+}

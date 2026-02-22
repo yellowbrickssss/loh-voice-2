@@ -162,9 +162,14 @@
                      <!-- Dynamic Content will be loaded here via app.js -->
                 </div>
             </section>
-            <button class="receipt-toggle-btn" id="receiptToggle" type="button" aria-label="영웅 대사 영수증 열기/닫기">
-                🧾 Entry Permit
-            </button>
+            <div class="voice-bottom-actions">
+                <button class="receipt-toggle-btn" id="receiptToggle" type="button" aria-label="영웅 대사 영수증 열기/닫기">
+                    🧾 Entry Permit
+                </button>
+                <button id="moviesToggleBtn" class="receipt-toggle-btn" aria-label="영상 페이지 열기">
+                    🎞 movies
+                </button>
+            </div>
         </div>
 
         <div class="v-divider"></div>
@@ -251,6 +256,89 @@
                 firebase.initializeApp(firebaseConfig);
             }
         }
+    </script>
+
+    <!-- Movies Modal Overlay -->
+    <div id="moviesModal" class="movies-modal-overlay" aria-hidden="true" style="display:none;">
+        <div class="movies-modal-container">
+            <button id="moviesCloseBtn" class="movies-close-btn" aria-label="Close">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                    <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                </svg>
+            </button>
+            <iframe id="moviesFrame" class="movies-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+    
+    <style>
+        .movies-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .movies-modal-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .movies-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            z-index: 10001;
+            padding: 10px;
+            width: 44px;
+            height: 44px;
+        }
+        .movies-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const moviesBtn = document.getElementById('moviesToggleBtn');
+            const moviesModal = document.getElementById('moviesModal');
+            const moviesCloseBtn = document.getElementById('moviesCloseBtn');
+            const moviesFrame = document.getElementById('moviesFrame');
+            
+            if (moviesBtn && moviesModal && moviesCloseBtn) {
+                // Open
+                moviesBtn.addEventListener('click', () => {
+                    moviesModal.style.display = 'flex';
+                    moviesModal.setAttribute('aria-hidden', 'false');
+                    document.body.style.overflow = 'hidden'; // Lock background scroll
+                    
+                    if (!moviesFrame.getAttribute('src')) {
+                        moviesFrame.setAttribute('src', '출격영상/movies.html');
+                    }
+                });
+                
+                // Close
+                moviesCloseBtn.addEventListener('click', () => {
+                    moviesModal.style.display = 'none';
+                    moviesModal.setAttribute('aria-hidden', 'true');
+                    document.body.style.overflow = ''; // Unlock background scroll
+                    
+                    // Stop video/audio by clearing src
+                    moviesFrame.setAttribute('src', '');
+                });
+            }
+        });
     </script>
 
     <!-- Data & Scripts -->
