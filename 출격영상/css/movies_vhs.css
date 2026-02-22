@@ -11,7 +11,7 @@
 
 /* TV 전체 케이스 */
 .wood-tv-casing {
-    width: 540px; height: 360px;
+    width: 640px; height: 360px;
     background-color: #5d4037;
     background-image: 
         repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, transparent 1px, transparent 3px, rgba(0,0,0,0.05) 4px),
@@ -254,9 +254,9 @@
 
     .wood-tv-casing {
         width: 100%;
-        max-width: 540px;
+        max-width: 640px;
         height: auto;
-        aspect-ratio: 540 / 360;
+        aspect-ratio: 16 / 9;
         padding: 10px;
         gap: 10px;
         flex-shrink: 0;

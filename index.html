@@ -283,6 +283,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: url('cursor/커서/감동란님%20기본.ani'), url('cursor/원본%20파일/감동란님%20기본.png'), auto;
         }
         .movies-modal-container {
             width: 100%;
@@ -291,16 +292,32 @@
         }
         .movies-close-btn {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
+            top: 25px;
+            right: 25px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
             color: #fff;
-            cursor: pointer;
+            cursor: url('cursor/커서/감동란님%20선택.ani'), url('cursor/원본%20파일/감동란님%20선택.png'), pointer;
             z-index: 10001;
-            padding: 10px;
-            width: 44px;
-            height: 44px;
+            padding: 8px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(2px);
+        }
+        .movies-close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #fff;
+            transform: scale(1.1);
+        }
+        .movies-close-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke-width: 2;
         }
         .movies-iframe {
             width: 100%;

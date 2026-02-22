@@ -4,7 +4,7 @@
 var playlistAudio; // Will be the video element
 var isPlaylistPlaying = false;
 var currentTrackIndex = 0;
-var isRepeat = false;
+var repeatMode = 0; // 0: Off, 1: Loop All, 2: Repeat One
 var isShuffle = false;
 
 // Expose state
@@ -237,7 +237,11 @@ function initSoundwaveForMovies() {
 
 
 // --- Main Initialization ---
+var isPlaylistInitialized = false;
 function initPlaylist() {
+    if (isPlaylistInitialized) return;
+    isPlaylistInitialized = true;
+
     // 1. Get Video Element
     playlistAudio = document.getElementById('tv-video-player');
     if (!playlistAudio) {
@@ -248,11 +252,24 @@ function initPlaylist() {
     // 2. Event Listeners
     playlistAudio.addEventListener('timeupdate', updatePhoneProgress);
     playlistAudio.addEventListener('ended', function() {
-        if (isRepeat) {
+        if (repeatMode === 2) {
+            // Repeat One
             playlistAudio.currentTime = 0;
             playlistAudio.play();
-        } else {
+        } else if (repeatMode === 1) {
+            // Loop All
             nextTrack();
+        } else {
+            // Off (No Repeat)
+            // Check if it is the last track
+            if (currentTrackIndex < playlistData.length - 1) {
+                nextTrack();
+            } else {
+                // Stop playback
+                isPlaylistPlaying = false;
+                window.isPlaylistPlaying = false;
+                syncAllUI();
+            }
         }
     });
     // On play/pause, update UI state
@@ -322,8 +339,38 @@ window.prevTrack = prevTrack;
 window.nextTrack = nextTrack;
 window.togglePlaylistAudio = togglePlaylistAudio;
 window.seekPlaylistAudio = seekPlaylistAudio;
-window.toggleRepeat = function() { isRepeat = !isRepeat; /* Add UI toggle if needed */ };
-window.toggleShuffle = function() { isShuffle = !isShuffle; /* Add UI toggle if needed */ };
+window.toggleRepeat = function() {
+    // Cycle: 0 (Off) -> 1 (Loop All) -> 2 (Repeat One) -> 0
+    repeatMode = (repeatMode + 1) % 3;
+    
+    // UI Update
+    const btn = document.querySelector('.lp-ctrl-side i.fa-repeat')?.parentElement;
+    if (btn) {
+        // Reset basic state
+        btn.classList.remove('active');
+        btn.classList.remove('repeat-one');
+        btn.innerHTML = '<i class="fa-solid fa-repeat"></i>';
+
+        if (repeatMode === 1) {
+            // Loop All
+            btn.classList.add('active');
+        } else if (repeatMode === 2) {
+            // Repeat One
+            btn.classList.add('active');
+            btn.classList.add('repeat-one');
+            // We use CSS to add the '1' via ::after, so we keep the icon as is
+        }
+    }
+};
+
+window.toggleShuffle = function() {
+    isShuffle = !isShuffle;
+    const btn = document.querySelector('.lp-ctrl-side i.fa-shuffle')?.parentElement;
+    if (btn) {
+        if (isShuffle) btn.classList.add('active');
+        else btn.classList.remove('active');
+    }
+};
 
 // Auto-init on load
 if (document.readyState === 'loading') {

@@ -50,6 +50,35 @@ body {
     align-items: flex-start; /* Align to top for scrolling content */
     overflow-y: auto; /* Enable full page scroll */
     padding-top: 40px; /* Add padding for visual balance */
+    cursor: url('../../cursor/커서/감동란님%20기본.ani'), url('../../cursor/원본%20파일/감동란님%20기본.png'), auto;
+}
+
+/* Repeat One Icon Styling */
+.lp-ctrl-side.repeat-one {
+    position: relative;
+}
+.lp-ctrl-side.repeat-one::after {
+    content: '1';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 8px;
+    font-weight: 900;
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--accent-primary);
+    background: transparent;
+    pointer-events: none;
+    text-shadow: 0 0 2px #000;
+    margin-top: 1px; /* Fine-tune vertical alignment */
+}
+.lp-ctrl-side.repeat-one i {
+    opacity: 1;
+}
+
+/* Custom Cursor for Interactables */
+a, button, .knob-dial, .lp-progress-bar, .lp-pl-item, .crt-screen {
+    cursor: url('../../cursor/커서/감동란님%20선택.ani'), url('../../cursor/원본%20파일/감동란님%20선택.png'), pointer !important;
 }
 
 /* Background Stars/Particles (Copied from styles.css) */
@@ -167,7 +196,7 @@ body {
     width: 160%;
     height: 160%;
     overflow: visible !important;
-    opacity: 0.5;
+    opacity: 0.7;
 }
 .lp-soundwave .soundwave-canvas,
 .lp-record-with-soundwave .lp-soundwave-ring .soundwave-canvas {
