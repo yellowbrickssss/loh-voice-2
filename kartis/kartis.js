@@ -76,7 +76,7 @@ const KARTIS_DATA =[
                 id: "v_auto_1771673153",
                 label: "타이틀 콜",
                 transcript: "Lord Of Heroes.",
-                audio: "kartis/[빛] 왕자 카르티스 타이틀 콜.mp3"
+                audio: "asset/kartis/[빛] 왕자 카르티스 타이틀 콜.mp3"
             }
         ]
     }
