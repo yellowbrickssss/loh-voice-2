@@ -95,7 +95,8 @@ function loadTrack(index) {
 
     // 1. Set Video Source
     if (playlistAudio) {
-        playlistAudio.src = track.video;
+        // Encode URI to handle spaces in filenames
+        playlistAudio.src = encodeURI(track.video);
         playlistAudio.load(); // Important for video
     }
 
@@ -325,7 +326,10 @@ function initPlaylist() {
     // 5. Initial UI Sync (load first track info without playing)
     if (playlistData.length > 0) {
         // Just set src but don't play
-        playlistAudio.src = playlistData[0].video;
+        playlistAudio.src = encodeURI(playlistData[0].video);
+        // Removed explicit pause() to prevent "interrupted by a call to pause" error
+        // since we haven't called play() yet, it shouldn't auto-play without autoplay attribute.
+        
         // Also trigger color extraction for the first track
         syncLPPlayer(playlistData[0]);
         // Set active class
