@@ -1281,3 +1281,39 @@ textarea,
     transform: translateX(16px);
     background: #fff;
 }
+
+/* Rosanna Archive Link */
+.rosanna-archive-container {
+    margin-top: 24px;
+    display: flex;
+    justify-content: flex-start;
+}
+.rosanna-archive-btn {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    background: rgba(20, 30, 50, 0.4);
+    border: 1px solid;
+    border-radius: 999px;
+    padding: 6px 20px 6px 8px;
+    transition: all 0.2s ease;
+    opacity: 0.9;
+}
+.rosanna-archive-btn:hover {
+    background: rgba(137, 196, 244, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    opacity: 1;
+}
+.rosanna-sd-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    margin-right: 12px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+.rosanna-archive-text {
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}

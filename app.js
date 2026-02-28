@@ -641,6 +641,14 @@ function init() {
                 <div class="quote-meta" style="color: ${accentColor}">
                     ${voice.label} | ${currentHero.element.toUpperCase()}
                 </div>
+                ${(currentHero.id.includes('rosanna') || currentHero.name.includes('로잔나')) ? `
+                <div class="rosanna-archive-container">
+                    <a href="https://rosanna-archive.netlify.app/" target="_blank" class="rosanna-archive-btn" style="border-color: ${accentColor}; color: ${accentColor}">
+                        <img src="rosanna/sd.png" alt="Rosanna SD" class="rosanna-sd-icon">
+                        <span class="rosanna-archive-text">HBD Archive</span>
+                    </a>
+                </div>
+                ` : ''}
             </div>
         `;
         const canvas = transcriptEl.querySelector('.quote-visualizer canvas');
